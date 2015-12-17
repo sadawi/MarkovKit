@@ -41,7 +41,6 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
     }
     
     /**
-     
      Viterbi algorithm
      
      Computes a likely sequence of hidden states that could have produced the observations.
