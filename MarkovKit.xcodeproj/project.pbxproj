@@ -16,6 +16,8 @@
 		22232B0D1C2344A700A70E2A /* HiddenMarkovModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0C1C2344A700A70E2A /* HiddenMarkovModel.swift */; };
 		22232B0F1C2345AA00A70E2A /* MarkovModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0E1C2345AA00A70E2A /* MarkovModel.swift */; };
 		22232B101C2355F000A70E2A /* HiddenMarkovModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0C1C2344A700A70E2A /* HiddenMarkovModel.swift */; };
+		22232B111C235E9700A70E2A /* MarkovModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0E1C2345AA00A70E2A /* MarkovModel.swift */; };
+		22232B121C235E9A00A70E2A /* ProbabilityMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0A1C23375200A70E2A /* ProbabilityMatrix.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +230,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				22232B091C23296100A70E2A /* ProbabilityVector.swift in Sources */,
+				22232B121C235E9A00A70E2A /* ProbabilityMatrix.swift in Sources */,
+				22232B111C235E9700A70E2A /* MarkovModel.swift in Sources */,
 				22232AFC1C23255D00A70E2A /* MarkovKitTests.swift in Sources */,
 				22232B101C2355F000A70E2A /* HiddenMarkovModel.swift in Sources */,
 			);
