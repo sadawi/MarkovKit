@@ -21,7 +21,7 @@ let model: MarkovModel<String> = [
     "x": ["y": 1],
     "y": ["x": 1],
 ]
-let chain = model.generateChain(maximumLength: 5)
+let chain = model.generateChain(from: "x", maximumLength: 5)
 
 // ["x", "y", "x", "y", "x"]
 ```
