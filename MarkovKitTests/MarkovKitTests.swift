@@ -68,4 +68,9 @@ class MarkovKitTests: XCTestCase {
         assertNear(self.vectorOuputFraction(vectorB, item: "red"), target:0.75, delta:delta)
     }
     
+//    func testViterbi() {
+//        let hmm = HiddenMarkovModel()
+//        
+//    }
+    
 }

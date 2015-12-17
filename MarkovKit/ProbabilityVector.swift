@@ -9,23 +9,38 @@
 import Foundation
 
 public class ProbabilityVector<T:Hashable> {
-    private var itemsToProbabilities:[T:Double] = [:]
-    
-    private var needsNormalization:Bool = true
-    
-    public init(items:[T]=[], probabilities:[Double]=[]) {
-        let defaultValue:Double = 1.0/Double(items.count)
-        for i in 0..<items.count {
-            let item = items[i]
-            let p = i < probabilities.count ? probabilities[i] : defaultValue
-            self[item] = p
+    private var items:[T] = []
+    private var probabilities:[Double] {
+        get {
+            return self.items.map { self.itemsToProbabilities[$0]! }
+        }
+        set {
+            let defaultValue:Double = 1.0/Double(items.count)
+            for i in 0..<self.items.count {
+                let item = self.items[i]
+                let p = i < newValue.count ? newValue[i] : defaultValue
+                self.itemsToProbabilities[item] = p
+            }
+            self.needsNormalization = true
         }
     }
     
-    public func probabilityOfItem(item:T) -> Double? {
+    private var itemsToProbabilities:[T:Double] = [:]
+    private var needsNormalization:Bool = true
+    
+    public init(items:[T]=[], probabilities:[Double]=[]) {
+        self.items = items
+        self.probabilities = probabilities
+    }
+    
+    public init(items:[T], CSVString string:String) {
+        self.items = items
+        self.readProbabilitiesFromCSVString(string)
+    }
+    
+    public func probabilityOfItem(item:T) -> Double {
         self.normalizeIfNeeded()
-        
-        return self.itemsToProbabilities[item]
+        return self.itemsToProbabilities[item] ?? 0
     }
 
     public func setProbabilityOfItem(item:T, _ probability:Double) {
@@ -33,12 +48,12 @@ public class ProbabilityVector<T:Hashable> {
         self.needsNormalization = true
     }
     
-    public subscript(item:T) -> Double? {
+    public subscript(item:T) -> Double {
         get {
             return self.probabilityOfItem(item)
         }
         set {
-            self.setProbabilityOfItem(item, newValue ?? 0)
+            self.setProbabilityOfItem(item, newValue)
         }
     }
     
@@ -46,16 +61,15 @@ public class ProbabilityVector<T:Hashable> {
         self.normalizeIfNeeded()
         
         let random = Double(arc4random()) / Double(UINT32_MAX)
-        let items = Array(self.itemsToProbabilities.keys)
         var sum:Double = 0
-        for i in 0..<items.count {
-            let item = items[i]
+        for i in 0..<self.items.count {
+            let item = self.items[i]
             sum = sum + (self[item] ?? 0)
             if sum > random {
-                return items[i]
+                return self.items[i]
             }
         }
-        return items.last
+        return self.items.last
     }
     
     private func normalize() {
@@ -79,5 +93,16 @@ public class ProbabilityVector<T:Hashable> {
         }
     }
     
+    private func readProbabilitiesFromCSVString(string:String) {
+        let separator = ","
+        
+        var probabilities:[Double] = []
+        for value in string.componentsSeparatedByString(separator) {
+            let value = value.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let probability = Double(value) ?? 0
+            probabilities.append(probability)
+        }
+        self.probabilities = probabilities
+    }
     
 }

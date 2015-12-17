@@ -12,6 +12,10 @@
 		22232AFC1C23255D00A70E2A /* MarkovKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232AFB1C23255D00A70E2A /* MarkovKitTests.swift */; };
 		22232B081C2325AA00A70E2A /* ProbabilityVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B071C2325AA00A70E2A /* ProbabilityVector.swift */; };
 		22232B091C23296100A70E2A /* ProbabilityVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B071C2325AA00A70E2A /* ProbabilityVector.swift */; };
+		22232B0B1C23375200A70E2A /* ProbabilityMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0A1C23375200A70E2A /* ProbabilityMatrix.swift */; };
+		22232B0D1C2344A700A70E2A /* HiddenMarkovModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0C1C2344A700A70E2A /* HiddenMarkovModel.swift */; };
+		22232B0F1C2345AA00A70E2A /* MarkovModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0E1C2345AA00A70E2A /* MarkovModel.swift */; };
+		22232B101C2355F000A70E2A /* HiddenMarkovModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B0C1C2344A700A70E2A /* HiddenMarkovModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +36,9 @@
 		22232AFB1C23255D00A70E2A /* MarkovKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkovKitTests.swift; sourceTree = "<group>"; };
 		22232AFD1C23255D00A70E2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22232B071C2325AA00A70E2A /* ProbabilityVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProbabilityVector.swift; sourceTree = "<group>"; };
+		22232B0A1C23375200A70E2A /* ProbabilityMatrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProbabilityMatrix.swift; sourceTree = "<group>"; };
+		22232B0C1C2344A700A70E2A /* HiddenMarkovModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenMarkovModel.swift; sourceTree = "<group>"; };
+		22232B0E1C2345AA00A70E2A /* MarkovModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkovModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				22232B071C2325AA00A70E2A /* ProbabilityVector.swift */,
+				22232B0A1C23375200A70E2A /* ProbabilityMatrix.swift */,
+				22232B0E1C2345AA00A70E2A /* MarkovModel.swift */,
+				22232B0C1C2344A700A70E2A /* HiddenMarkovModel.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -206,7 +216,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22232B0B1C23375200A70E2A /* ProbabilityMatrix.swift in Sources */,
+				22232B0F1C2345AA00A70E2A /* MarkovModel.swift in Sources */,
 				22232B081C2325AA00A70E2A /* ProbabilityVector.swift in Sources */,
+				22232B0D1C2344A700A70E2A /* HiddenMarkovModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +229,7 @@
 			files = (
 				22232B091C23296100A70E2A /* ProbabilityVector.swift in Sources */,
 				22232AFC1C23255D00A70E2A /* MarkovKitTests.swift in Sources */,
+				22232B101C2355F000A70E2A /* HiddenMarkovModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
