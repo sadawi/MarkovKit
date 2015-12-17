@@ -116,7 +116,7 @@ class MarkovKitTests: XCTestCase {
         // Example from https://en.wikipedia.org/wiki/Viterbi_algorithm
         
         let states = ["healthy", "sick"]
-        let initialProbabilities = ProbabilityVector(items: states, probabilities: [0.6, 0.4])
+        let initialProbabilities:ProbabilityVector<String> = ["healthy": 0.6, "sick": 0.4]
         
         let transitionProbabilities:MarkovModel<String> = [
             "healthy":  ["healthy": 0.7, "sick": 0.3],
