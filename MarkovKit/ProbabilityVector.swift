@@ -24,6 +24,7 @@ public class ProbabilityVector<T:Hashable> {
     
     public func probabilityOfItem(item:T) -> Double? {
         self.normalizeIfNeeded()
+        
         return self.itemsToProbabilities[item]
     }
 
@@ -42,6 +43,8 @@ public class ProbabilityVector<T:Hashable> {
     }
     
     public func randomItem() -> T? {
+        self.normalizeIfNeeded()
+        
         let random = Double(arc4random()) / Double(UINT32_MAX)
         let items = Array(self.itemsToProbabilities.keys)
         var sum:Double = 0
