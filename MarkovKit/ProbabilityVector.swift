@@ -13,7 +13,7 @@ public class ProbabilityVector<T:Hashable> {
     
     private var needsNormalization:Bool = true
     
-    public init(items:[T], probabilities:[Double]=[]) {
+    public init(items:[T]=[], probabilities:[Double]=[]) {
         let defaultValue:Double = 1.0/Double(items.count)
         for i in 0..<items.count {
             let item = items[i]

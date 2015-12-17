@@ -57,6 +57,15 @@ class MarkovKitTests: XCTestCase {
         let vector3 = ProbabilityVector<String>(items: colors, probabilities: [0.25, 0.25, 0.5])
         assertNear(self.vectorOuputFraction(vector3, item: "red"), target:0.25, delta:delta)
 
+        
+        let vectorB = ProbabilityVector<String>()
+        vectorB["red"] = 1
+        assertNear(self.vectorOuputFraction(vectorB, item: "red"), target:1.0, delta:delta)
+        vectorB["green"] = 1
+        assertNear(self.vectorOuputFraction(vectorB, item: "red"), target:0.5, delta:delta)
+        vectorB["green"] = 0.25
+        vectorB["red"] = 0.75
+        assertNear(self.vectorOuputFraction(vectorB, item: "red"), target:0.75, delta:delta)
     }
     
 }
