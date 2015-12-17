@@ -22,8 +22,12 @@ let model: MarkovModel<String> = [
     "y": ["x": 1],
 ]
 let chain = model.generateChain(from: "x", maximumLength: 5)
+// always returns ["x", "y", "x", "y", "x"]
 
-// ["x", "y", "x", "y", "x"]
+// To start a chain without an initial state, initial probabilities must be given:
+chain.initialProbabilities = ["x": 1]
+let newChain = model.generateChain(maximumLength: 5)
+
 ```
 
 
