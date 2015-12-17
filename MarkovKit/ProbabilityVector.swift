@@ -8,7 +8,10 @@
 
 import Foundation
 
-public class ProbabilityVector<T:Hashable> {
+public class ProbabilityVector<T:Hashable>: DictionaryLiteralConvertible {
+    public typealias Key = T
+    public typealias Value = Double
+    
     private var items:[T] = []
     private var probabilities:[Double] {
         get {
@@ -27,8 +30,13 @@ public class ProbabilityVector<T:Hashable> {
     
     private var itemsToProbabilities:[T:Double] = [:]
     private var needsNormalization:Bool = true
-    
-    public init(items:[T]=[], probabilities:[Double]=[]) {
+
+    public init(items:[T]) {
+        self.items = items
+        self.probabilities = []
+    }
+
+    public init(items:[T], probabilities:[Double]) {
         self.items = items
         self.probabilities = probabilities
     }
@@ -36,6 +44,12 @@ public class ProbabilityVector<T:Hashable> {
     public init(items:[T], CSVString string:String) {
         self.items = items
         self.readProbabilitiesFromCSVString(string)
+    }
+    
+    public required init(dictionaryLiteral elements: (Key, Value)...) {
+        for (key, value) in elements {
+            self[key] = value
+        }
     }
     
     public func probabilityOfItem(item:T) -> Double {

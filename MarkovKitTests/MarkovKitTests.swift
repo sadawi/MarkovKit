@@ -70,9 +70,9 @@ class MarkovKitTests: XCTestCase {
     
     func testMatrix() {
         let matrix = ProbabilityMatrix<String, String>()
-        matrix["a"] = ProbabilityVector(items: ["b"], probabilities: [1])
-        matrix["1"] = ProbabilityVector(items: ["2"], probabilities: [1])
-        matrix["x"] = ProbabilityVector(items: ["y", "z"], probabilities: [0.5, 0.5])
+        matrix["a"] = ["b": 1]
+        matrix["1"] = ["2": 1]
+        matrix["x"] = ["y": 0.5, "z": 0.5]
         
         XCTAssertEqual(matrix.transitionFromState("a"), "b")
         XCTAssertEqual(matrix.transitionFromState("1"), "2")
@@ -84,14 +84,14 @@ class MarkovKitTests: XCTestCase {
     func testMarkov() {
         let model = MarkovModel<String>()
         // a a a a a ...
-        model["a"] = ProbabilityVector(items: ["a"], probabilities: [1])
+        model["a"] = ["a": 1]
 
         // 1 2
-        model["1"] = ProbabilityVector(items: ["2"], probabilities: [1])
+        model["1"] = ["2": 1]
         
         // x y x y x y x y ...
-        model["x"] = ProbabilityVector(items: ["y"], probabilities: [1])
-        model["y"] = ProbabilityVector(items: ["x"], probabilities: [1])
+        model["x"] = ["y": 1]
+        model["y"] = ["x": 1]
         
         let aChain = model.generateChain(from: "a", maximumLength: 5)
         XCTAssertEqual(aChain, ["a", "a", "a", "a", "a"])
