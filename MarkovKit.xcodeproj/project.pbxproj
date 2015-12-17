@@ -10,6 +10,8 @@
 		22232AF01C23255D00A70E2A /* MarkovKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 22232AEF1C23255D00A70E2A /* MarkovKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22232AF71C23255D00A70E2A /* MarkovKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22232AEC1C23255D00A70E2A /* MarkovKit.framework */; };
 		22232AFC1C23255D00A70E2A /* MarkovKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232AFB1C23255D00A70E2A /* MarkovKitTests.swift */; };
+		22232B081C2325AA00A70E2A /* ProbabilityVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B071C2325AA00A70E2A /* ProbabilityVector.swift */; };
+		22232B091C23296100A70E2A /* ProbabilityVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22232B071C2325AA00A70E2A /* ProbabilityVector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,7 @@
 		22232AF61C23255D00A70E2A /* MarkovKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkovKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22232AFB1C23255D00A70E2A /* MarkovKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkovKitTests.swift; sourceTree = "<group>"; };
 		22232AFD1C23255D00A70E2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22232B071C2325AA00A70E2A /* ProbabilityVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProbabilityVector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,7 @@
 		22232AEE1C23255D00A70E2A /* MarkovKit */ = {
 			isa = PBXGroup;
 			children = (
+				22232B061C23259B00A70E2A /* models */,
 				22232AEF1C23255D00A70E2A /* MarkovKit.h */,
 				22232AF11C23255D00A70E2A /* Info.plist */,
 			);
@@ -84,6 +88,14 @@
 				22232AFD1C23255D00A70E2A /* Info.plist */,
 			);
 			path = MarkovKitTests;
+			sourceTree = "<group>";
+		};
+		22232B061C23259B00A70E2A /* models */ = {
+			isa = PBXGroup;
+			children = (
+				22232B071C2325AA00A70E2A /* ProbabilityVector.swift */,
+			);
+			name = models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22232B081C2325AA00A70E2A /* ProbabilityVector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22232B091C23296100A70E2A /* ProbabilityVector.swift in Sources */,
 				22232AFC1C23255D00A70E2A /* MarkovKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +322,7 @@
 		22232B011C23255D00A70E2A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +333,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = samwilliams.MarkovKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		22232B021C23255D00A70E2A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
