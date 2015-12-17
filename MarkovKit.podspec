@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "MarkovKit"
-    s.version          = "0.1.0"
+    s.version          = "0.5.0"
     s.summary          = "Tools for working with Markov models"
     s.homepage         = "https://github.com/sadawi/MarkovKit"
     s.license          = 'MIT'
