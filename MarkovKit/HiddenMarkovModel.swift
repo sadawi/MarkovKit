@@ -8,12 +8,6 @@
 
 import Foundation
 
-struct Structure<StateType> {
-    var prob:Double
-    var vPath:[StateType]
-    var vProb:Double
-}
-
 public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
     /// A list of possible hidden states
     public var states:[StateType]
@@ -23,10 +17,10 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
     
     /// Probabilities of transitions between states
     public var transitionProbabilities:MarkovModel<StateType>;
-
+    
     /// Probability of output observations for each state
     public var emissionProbabilities:ProbabilityMatrix<StateType, ObservationType>
-
+    
     public init(
         states: [StateType],
         initialProbabilities: ProbabilityVector<StateType>,
@@ -46,14 +40,14 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
      Computes a likely sequence of hidden states that could have produced the observations.
      */
     public func calculateStates(observations:[ObservationType]) -> [StateType] {
-        var t:[StateType:Structure<StateType>] = [:]
+        var t:[StateType:VStructure<StateType>] = [:]
         for state in self.states {
             let p0 = self.initialProbabilities[state] ?? 0
-            t[state] = Structure(prob: p0, vPath: [state], vProb: p0)
+            t[state] = VStructure(prob: p0, vPath: [state], vProb: p0)
         }
         
         for output in observations {
-            var u:[StateType:Structure<StateType>] = [:]
+            var u:[StateType:VStructure<StateType>] = [:]
             for nextState in self.states {
                 var total:Double = 0.0
                 var argmax:[StateType] = []
@@ -78,7 +72,7 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
                         valmax = vProb
                     }
                 }
-                let newList = Structure(prob: total, vPath: argmax, vProb: valmax)
+                let newList = VStructure(prob: total, vPath: argmax, vProb: valmax)
                 u[nextState] = newList
             }
             t = u
@@ -112,3 +106,13 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
     }
     
 }
+
+/**
+ A simple structure used internally in the Viterbi algorithm
+ */
+private struct VStructure<StateType> {
+    var prob:Double
+    var vPath:[StateType]
+    var vProb:Double
+}
+
