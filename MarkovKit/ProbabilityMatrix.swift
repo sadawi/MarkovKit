@@ -22,17 +22,8 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     /// The probabilities of transitioning from each source state to each output state.
     private var rows:[SourceStateType: RowType] = [:]
     
-//    public var sourceStates:[SourceStateType]
-//    public var destinationStates:[DestinationStateType]
-    
-//    public init(sourceStates:[SourceStateType], destinationStates:[DestinationStateType]) {
-//        self.sourceStates = sourceStates
-//        self.destinationStates = destinationStates
-//    }
-
     public init() {
     }
-    
 
     public init(sourceStates:[SourceStateType], destinationStates:[DestinationStateType], probabilitySets:[[Double]]) {
         for i in 0..<probabilitySets.count {
