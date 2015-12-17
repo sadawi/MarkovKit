@@ -68,6 +68,48 @@ class MarkovKitTests: XCTestCase {
         assertNear(self.vectorOuputFraction(vectorB, item: "red"), target:0.75, delta:delta)
     }
     
+    func testMatrix() {
+        let matrix = ProbabilityMatrix<String, String>()
+        matrix["a"] = ProbabilityVector(items: ["b"], probabilities: [1])
+        matrix["1"] = ProbabilityVector(items: ["2"], probabilities: [1])
+        matrix["x"] = ProbabilityVector(items: ["y", "z"], probabilities: [0.5, 0.5])
+        
+        XCTAssertEqual(matrix.transitionFromState("a"), "b")
+        XCTAssertEqual(matrix.transitionFromState("1"), "2")
+        
+        let either = matrix.transitionFromState("x")
+        XCTAssertTrue(either == "y" || either == "z")
+    }
+    
+    func testMarkov() {
+        let model = MarkovModel<String>()
+        // a a a a a ...
+        model["a"] = ProbabilityVector(items: ["a"], probabilities: [1])
+
+        // 1 2
+        model["1"] = ProbabilityVector(items: ["2"], probabilities: [1])
+        
+        // x y x y x y x y ...
+        model["x"] = ProbabilityVector(items: ["y"], probabilities: [1])
+        model["y"] = ProbabilityVector(items: ["x"], probabilities: [1])
+        
+        let aChain = model.generateChain(from: "a", maximumLength: 5)
+        XCTAssertEqual(aChain, ["a", "a", "a", "a", "a"])
+        
+        let bChain = model.generateChain(from: "1", maximumLength: 5)
+        XCTAssertEqual(bChain, ["1", "2"])
+        
+        let cChain = model.generateChain(from: "x", maximumLength: 5)
+        XCTAssertEqual(cChain, ["x", "y", "x", "y", "x"])
+        
+        let dChain = model.generateChain(maximumLength: 5)
+        XCTAssertEqual(dChain, [])
+        
+        model[nil] = ProbabilityVector(items: ["a"], probabilities: [1])
+        let eChain = model.generateChain(maximumLength: 5)
+        XCTAssertEqual(eChain, ["a", "a", "a", "a", "a"])
+    }
+
 //    func testViterbi() {
 //        let hmm = HiddenMarkovModel()
 //        

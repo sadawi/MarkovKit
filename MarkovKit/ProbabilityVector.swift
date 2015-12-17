@@ -95,8 +95,8 @@ public class ProbabilityVector<T:Hashable> {
             self.needsNormalization = false
         }
     }
-    
-    private func readProbabilitiesFromCSVString(string:String) {
+
+    internal class func parseCSV(string:String) -> [Double] {
         let separator = ","
         
         var probabilities:[Double] = []
@@ -105,7 +105,11 @@ public class ProbabilityVector<T:Hashable> {
             let probability = Double(value) ?? 0
             probabilities.append(probability)
         }
-        self.probabilities = probabilities
+        return probabilities
+    }
+    
+    internal func readProbabilitiesFromCSVString(string:String) {
+        self.probabilities = self.dynamicType.parseCSV(string)
     }
     
 }
