@@ -100,7 +100,7 @@ class MarkovKitTests: XCTestCase {
         
         let bChain = model.generateChain(from: "1", maximumLength: 5)
         XCTAssertEqual(bChain, ["1", "2"])
-        
+
         let cChain = model.generateChain(from: "x", maximumLength: 5)
         XCTAssertEqual(cChain, ["x", "y", "x", "y", "x"])
         

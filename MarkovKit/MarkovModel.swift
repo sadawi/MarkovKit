@@ -9,6 +9,14 @@
 import Foundation
 
 public class MarkovModel<StateType:Hashable>: ProbabilityMatrix<StateType, StateType> {
+    
+    public required init(dictionaryLiteral elements: (Key, Value)...) {
+        super.init()
+        for (key, value) in elements {
+            self.setProbabilitiesFromState(key, probabilities: value)
+        }
+    }
+    
     /**
      Generates a stochastic chain using the transition probabilities.
      
@@ -17,13 +25,13 @@ public class MarkovModel<StateType:Hashable>: ProbabilityMatrix<StateType, State
      - parameter stopCondition: An optional test to stop the chain early, if desired.
      
      */
-    public func generateChain(from initialState:StateType?=nil, maximumLength:Int, stopCondition:([StateType] -> Bool)?=nil) -> [StateType] {
+    public func generateChain(from initialState:StateType?=nil, maximumLength:Int) -> [StateType] {
         var result:[StateType] = []
         if let initialState = initialState {
             result.append(initialState)
         }
         var state = initialState
-        while result.count < maximumLength && stopCondition?(result) != true {
+        while result.count < maximumLength {
             state = self.transitionFromState(state)
             if let state = state {
                 result.append(state)
@@ -34,13 +42,5 @@ public class MarkovModel<StateType:Hashable>: ProbabilityMatrix<StateType, State
         }
         return result
     }
-    
-//    /**
-//    Generates a chain that satisfies a condition.
-//    */
-//    public func generateChainFrom(initialState:StateType, length:Int, condition:([StateType] -> Bool)) -> StateType {
-//        
-//    }
-//    
     
 }
