@@ -9,14 +9,6 @@
 import Foundation
 
 public class MarkovModel<StateType:Hashable>: ProbabilityMatrix<StateType, StateType> {
-    public override init() {
-        super.init()
-    }
-    
-    public init(states:[StateType], probabilitySets:[[Double]]) {
-        super.init(sourceStates: states, destinationStates: states, probabilitySets: probabilitySets)
-    }
-
     /**
      Generates a stochastic chain using the transition probabilities.
      

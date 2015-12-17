@@ -69,10 +69,11 @@ class MarkovKitTests: XCTestCase {
     }
     
     func testMatrix() {
-        let matrix = ProbabilityMatrix<String, String>()
-        matrix["a"] = ["b": 1]
-        matrix["1"] = ["2": 1]
-        matrix["x"] = ["y": 0.5, "z": 0.5]
+        let matrix:ProbabilityMatrix<String, String> = [
+            "a": ["b": 1],
+            "1": ["2": 1],
+            "x": ["y": 0.5, "z": 0.5]
+        ]
         
         XCTAssertEqual(matrix.transitionFromState("a"), "b")
         XCTAssertEqual(matrix.transitionFromState("1"), "2")
@@ -82,16 +83,17 @@ class MarkovKitTests: XCTestCase {
     }
     
     func testMarkov() {
-        let model = MarkovModel<String>()
-        // a a a a a ...
-        model["a"] = ["a": 1]
-
-        // 1 2
-        model["1"] = ["2": 1]
-        
-        // x y x y x y x y ...
-        model["x"] = ["y": 1]
-        model["y"] = ["x": 1]
+        let model: MarkovModel<String> = [
+            // a a a a a ...
+            "a": ["a": 1],
+            
+            // 1 2
+            "1": ["2": 1],
+            
+            // x y x y x y x y ...
+            "x": ["y": 1],
+            "y": ["x": 1],
+        ]
         
         let aChain = model.generateChain(from: "a", maximumLength: 5)
         XCTAssertEqual(aChain, ["a", "a", "a", "a", "a"])
@@ -116,13 +118,15 @@ class MarkovKitTests: XCTestCase {
         let states = ["healthy", "sick"]
         let initialProbabilities = ProbabilityVector(items: states, probabilities: [0.6, 0.4])
         
-        let transitionProbabilities = MarkovModel<String>()
-        transitionProbabilities["healthy"] = ProbabilityVector(items: ["healthy", "sick"], probabilities: [0.7, 0.3])
-        transitionProbabilities["sick"] = ProbabilityVector(items: ["healthy", "sick"], probabilities: [0.4, 0.6])
+        let transitionProbabilities:MarkovModel<String> = [
+            "healthy":  ["healthy": 0.7, "sick": 0.3],
+            "sick":     ["healthy": 0.4, "sick": 0.6],
+        ]
         
-        let emissionProbabilities = MarkovModel<String>()
-        emissionProbabilities["healthy"] = ProbabilityVector(items: ["normal", "cold", "dizzy"], probabilities: [0.5, 0.4, 0.1])
-        emissionProbabilities["sick"] = ProbabilityVector(items: ["normal", "cold", "dizzy"], probabilities: [0.1, 0.3, 0.6])
+        let emissionProbabilities: MarkovModel<String> = [
+            "healthy":  ["normal": 0.5, "cold": 0.4, "dizzy": 0.1],
+            "sick":     ["normal": 0.1, "cold": 0.3, "dizzy": 0.6],
+        ]
         
         let hmm = HiddenMarkovModel(states:states, initialProbabilities: initialProbabilities, transitionProbabilities: transitionProbabilities, emissionProbabilities: emissionProbabilities)
 

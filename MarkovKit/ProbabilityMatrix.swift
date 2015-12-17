@@ -13,8 +13,11 @@ import Foundation
  
  There is a special row for initial states, since we're not treating nil as a valid state.
 */
-public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Hashable> {
+public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Hashable>: DictionaryLiteralConvertible {
     public typealias RowType = ProbabilityVector<DestinationStateType>
+
+    public typealias Key = SourceStateType
+    public typealias Value = RowType
     
     /// The probabilities of each destination state without an initial state.
     private var initialProbabilities:RowType = ProbabilityVector()
@@ -22,9 +25,12 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     /// The probabilities of transitioning from each source state to each output state.
     private var rows:[SourceStateType: RowType] = [:]
     
-    public init() {
+    public required init(dictionaryLiteral elements: (Key, Value)...) {
+        for (key, value) in elements {
+            self.setProbabilitiesFromState(key, probabilities: value)
+        }
     }
-
+    
     public init(sourceStates:[SourceStateType], destinationStates:[DestinationStateType], probabilitySets:[[Double]]) {
         for i in 0..<probabilitySets.count {
             let probabilities = probabilitySets[i]
