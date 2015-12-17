@@ -23,7 +23,10 @@ let emissionProbabilities: MarkovModel<String> = [
     "sick":     ["normal": 0.1, "cold": 0.3, "dizzy": 0.6],
 ]
 
-let hmm = HiddenMarkovModel(states:states, initialProbabilities: initialProbabilities, transitionProbabilities: transitionProbabilities, emissionProbabilities: emissionProbabilities)
+let hmm = HiddenMarkovModel(states:states, 
+    initialProbabilities: initialProbabilities, 
+    transitionProbabilities: transitionProbabilities, 
+    emissionProbabilities: emissionProbabilities)
 
 let observations = ["normal", "cold", "dizzy"]
 let prediction = hmm.calculateStates(observations)
