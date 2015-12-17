@@ -23,8 +23,11 @@ let model: MarkovModel<String> = [
 ]
 let chain = model.generateChain(from: "x", maximumLength: 5)
 // always returns ["x", "y", "x", "y", "x"]
+```
 
-// To start a chain without an initial state, initial probabilities must be given:
+To start a chain without an initial state, initial probabilities must be given:
+
+```swift
 chain.initialProbabilities = ["x": 1]
 let newChain = model.generateChain(maximumLength: 5)
 
