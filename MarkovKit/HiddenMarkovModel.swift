@@ -16,10 +16,7 @@ struct Structure<StateType> {
 
 public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
     /// A list of possible hidden states
-    public var states:[StateType] = []
-    
-    /// The sequence of observations (outputs)
-    public var observations:[ObservationType] = []
+    public var states:[StateType]
     
     /// Prior probability distribution of the states
     public var initialProbabilities:ProbabilityVector<StateType>
@@ -31,11 +28,13 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
     public var emissionProbabilities:ProbabilityMatrix<StateType, ObservationType>
 
     public init(
+        states: [StateType],
         initialProbabilities: ProbabilityVector<StateType>,
         transitionProbabilities: MarkovModel<StateType>,
         emissionProbabilities: ProbabilityMatrix<StateType, ObservationType>
         )
     {
+        self.states = states
         self.initialProbabilities = initialProbabilities
         self.transitionProbabilities = transitionProbabilities
         self.emissionProbabilities = emissionProbabilities
@@ -47,14 +46,14 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
      
      Computes a likely sequence of hidden states that could have produced the observations.
      */
-    public func calculateStates() -> [StateType] {
+    public func calculateStates(observations:[ObservationType]) -> [StateType] {
         var t:[StateType:Structure<StateType>] = [:]
         for state in self.states {
             let p0 = self.initialProbabilities[state] ?? 0
             t[state] = Structure(prob: p0, vPath: [state], vProb: p0)
         }
         
-        for output in self.observations {
+        for output in observations {
             var u:[StateType:Structure<StateType>] = [:]
             for nextState in self.states {
                 var total:Double = 0.0

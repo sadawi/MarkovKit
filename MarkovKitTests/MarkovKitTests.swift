@@ -110,9 +110,25 @@ class MarkovKitTests: XCTestCase {
         XCTAssertEqual(eChain, ["a", "a", "a", "a", "a"])
     }
 
-//    func testViterbi() {
-//        let hmm = HiddenMarkovModel()
-//        
-//    }
+    func testHMM() {
+        // Example from https://en.wikipedia.org/wiki/Viterbi_algorithm
+        
+        let states = ["healthy", "sick"]
+        let initialProbabilities = ProbabilityVector(items: states, probabilities: [0.6, 0.4])
+        
+        let transitionProbabilities = MarkovModel<String>()
+        transitionProbabilities["healthy"] = ProbabilityVector(items: ["healthy", "sick"], probabilities: [0.7, 0.3])
+        transitionProbabilities["sick"] = ProbabilityVector(items: ["healthy", "sick"], probabilities: [0.4, 0.6])
+        
+        let emissionProbabilities = MarkovModel<String>()
+        emissionProbabilities["healthy"] = ProbabilityVector(items: ["normal", "cold", "dizzy"], probabilities: [0.5, 0.4, 0.1])
+        emissionProbabilities["sick"] = ProbabilityVector(items: ["normal", "cold", "dizzy"], probabilities: [0.1, 0.3, 0.6])
+        
+        let hmm = HiddenMarkovModel(states:states, initialProbabilities: initialProbabilities, transitionProbabilities: transitionProbabilities, emissionProbabilities: emissionProbabilities)
+
+        let observations = ["normal", "cold", "dizzy"]
+        let prediction = hmm.calculateStates(observations)
+        XCTAssertEqual(prediction, ["healthy", "healthy", "sick"])
+    }
     
 }
