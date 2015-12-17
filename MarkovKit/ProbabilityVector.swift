@@ -53,6 +53,9 @@ public class ProbabilityVector<T:Hashable> {
             return self.probabilityOfItem(item)
         }
         set {
+            if !self.items.contains(item) {
+                self.items.append(item)
+            }
             self.setProbabilityOfItem(item, newValue)
         }
     }
