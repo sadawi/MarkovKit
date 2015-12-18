@@ -1,3 +1,7 @@
+[![Version](https://img.shields.io/cocoapods/v/MarkovKit.svg?style=flat)](http://cocoapods.org/pods/MarkovKit)
+[![License](https://img.shields.io/cocoapods/l/MarkovKit.svg?style=flat)](http://cocoapods.org/pods/MarkovKit)
+[![Platform](https://img.shields.io/cocoapods/p/MarkovKit.svg?style=flat)](http://cocoapods.org/pods/MarkovKit)
+
 # MarkovKit
 
 Some simple tools for working with probabilities and Markov models in Swift.
