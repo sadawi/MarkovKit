@@ -23,7 +23,7 @@ pod 'MarkovKit', '~> 0.6.0'
 
 ```swift
 let vector: ProbabilityVector<String> = ["red": 0.25, "blue": 0.5, "green": 0.25]
-let item = vector.item()  // should return "blue" about 50% of the time
+let item = vector.randomItem()  // should return "blue" about 50% of the time
 ```
 
 ## Markov Chains
