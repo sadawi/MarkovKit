@@ -40,7 +40,7 @@ let chain = model.generateChain(from: "x", maximumLength: 5)
 To start a chain without an initial state, initial probabilities must be given:
 
 ```swift
-chain.initialProbabilities = ["x": 1]
+model.initialProbabilities = ["x": 1]
 let newChain = model.generateChain(maximumLength: 5)
 
 ```
