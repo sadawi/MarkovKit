@@ -11,6 +11,14 @@ Some simple tools for working with probabilities and Markov models in Swift.
 * `MarkovModel`: A `ProbabilityMatrix` where the input and output states are the same.  Can generate chains.
 * `HiddenMarkovModel`: Implementation of the [Viterbi algorithm](https://en.wikipedia.org/wiki/Viterbi_algorithm) for obtaining a likely sequence of hidden states from a sequence of observations
 
+## Installation
+
+In your Podfile:
+
+```
+pod 'MarkovKit', '~> 0.6.0'
+```
+
 ## Probability Vectors
 
 ```swift
