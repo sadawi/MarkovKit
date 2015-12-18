@@ -123,7 +123,7 @@ class MarkovKitTests: XCTestCase {
             "sick":     ["healthy": 0.4, "sick": 0.6],
         ]
         
-        let emissionProbabilities: MarkovModel<String> = [
+        let emissionProbabilities: ProbabilityMatrix<String, String> = [
             "healthy":  ["normal": 0.5, "cold": 0.4, "dizzy": 0.1],
             "sick":     ["normal": 0.1, "cold": 0.3, "dizzy": 0.6],
         ]
