@@ -21,9 +21,22 @@ pod 'MarkovKit', '~> 0.6.0'
 
 ## Probability Vectors
 
+Thanks to `DictionaryLiteralConvertible`, it's simple to initialize a vector:
+
 ```swift
 let vector: ProbabilityVector<String> = ["red": 0.25, "blue": 0.5, "green": 0.25]
 let item = vector.randomItem()  // should return "blue" about 50% of the time
+```
+
+## Probability Matrices
+
+A probability matrix is a mapping of input states to probability vectors describing possible output states.  Again, they can be initialized easily with dictionary literals:
+
+```swift
+let matrix: ProbabilityMatrix<Int, String> = [
+    1: ["output1": 1]
+    2: ["output2": 0.5, "output3": 0.5]
+]
 ```
 
 ## Markov Chains
