@@ -41,7 +41,7 @@ class MarkovKitTests: XCTestCase {
         let delta = 0.05
         let colors = ["red", "blue", "green"]
         let vector = ProbabilityVector(items: colors)
-        XCTAssertEqual(vector.probabilityOfItem("red"), Double(1)/Double(3))
+        XCTAssertEqual(vector.probability(ofItem: "red"), Double(1)/Double(3))
         
         let vectorA = ProbabilityVector(items: colors, probabilities: [2, 1, 1])
         XCTAssertEqual(vectorA["red"], 0.5)

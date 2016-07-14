@@ -52,25 +52,25 @@ public class ProbabilityVector<T:Hashable>: DictionaryLiteralConvertible {
         }
     }
     
-    public func probabilityOfItem(_ item:T) -> Double {
+    public func probability(ofItem item:T) -> Double {
         self.normalizeIfNeeded()
         return self.itemsToProbabilities[item] ?? 0
     }
 
-    public func setProbabilityOfItem(_ item:T, _ probability:Double) {
+    public func setProbability(ofItem item:T, _ probability:Double) {
         self.itemsToProbabilities[item] = probability
         self.needsNormalization = true
     }
     
     public subscript(item:T) -> Double {
         get {
-            return self.probabilityOfItem(item)
+            return self.probability(ofItem: item)
         }
         set {
             if !self.items.contains(item) {
                 self.items.append(item)
             }
-            self.setProbabilityOfItem(item, newValue)
+            self.setProbability(ofItem: item, newValue)
         }
     }
     

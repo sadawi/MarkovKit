@@ -83,7 +83,7 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
 
     
     public func probability(ofState state:DestinationStateType, fromState initialState:SourceStateType?) -> Double {
-        return self.probabilities(fromState: initialState)?.probabilityOfItem(state) ?? 0
+        return self.probabilities(fromState: initialState)?.probability(ofItem: state) ?? 0
     }
     
     public func transition(fromState state:SourceStateType?) -> DestinationStateType? {
