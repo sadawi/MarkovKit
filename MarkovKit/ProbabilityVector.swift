@@ -52,12 +52,12 @@ public class ProbabilityVector<T:Hashable>: DictionaryLiteralConvertible {
         }
     }
     
-    public func probabilityOfItem(item:T) -> Double {
+    public func probabilityOfItem(_ item:T) -> Double {
         self.normalizeIfNeeded()
         return self.itemsToProbabilities[item] ?? 0
     }
 
-    public func setProbabilityOfItem(item:T, _ probability:Double) {
+    public func setProbabilityOfItem(_ item:T, _ probability:Double) {
         self.itemsToProbabilities[item] = probability
         self.needsNormalization = true
     }
@@ -110,19 +110,19 @@ public class ProbabilityVector<T:Hashable>: DictionaryLiteralConvertible {
         }
     }
 
-    internal class func parseCSV(string:String) -> [Double] {
+    internal class func parseCSV(_ string:String) -> [Double] {
         let separator = ","
         
         var probabilities:[Double] = []
-        for value in string.componentsSeparatedByString(separator) {
-            let value = value.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        for value in string.components(separatedBy: separator) {
+            let value = value.trimmingCharacters(in: CharacterSet.whitespaces)
             let probability = Double(value) ?? 0
             probabilities.append(probability)
         }
         return probabilities
     }
     
-    internal func readProbabilitiesFromCSVString(string:String) {
+    internal func readProbabilitiesFromCSVString(_ string:String) {
         self.probabilities = self.dynamicType.parseCSV(string)
     }
     

@@ -47,14 +47,14 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     
     public convenience init(sourceStates:[SourceStateType], destinationStates:[DestinationStateType], CSVString string:String) {
         var probabilitySets:[[Double]] = []
-        for line in string.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) {
+        for line in string.components(separatedBy: CharacterSet.newlines) {
             let probabilities = ProbabilityVector<SourceStateType>.parseCSV(line)
             probabilitySets.append(probabilities)
         }
         self.init(sourceStates: sourceStates, destinationStates: destinationStates, probabilitySets: probabilitySets)
     }
     
-    public func probabilitiesFromState(state:SourceStateType?) -> RowType? {
+    public func probabilitiesFromState(_ state:SourceStateType?) -> RowType? {
         if let state = state {
             return self.rows[state]
         } else {
@@ -62,7 +62,7 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
         }
     }
     
-    public func setProbabilitiesFromState(state:SourceStateType?, probabilities:RowType) {
+    public func setProbabilitiesFromState(_ state:SourceStateType?, probabilities:RowType) {
         if let state = state {
             self.rows[state] = probabilities
         } else {
@@ -82,11 +82,11 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     }
 
     
-    public func probabilityOfState(state:DestinationStateType, fromState initialState:SourceStateType?) -> Double {
+    public func probabilityOfState(_ state:DestinationStateType, fromState initialState:SourceStateType?) -> Double {
         return self.probabilitiesFromState(initialState)?.probabilityOfItem(state) ?? 0
     }
     
-    public func transitionFromState(state:SourceStateType?) -> DestinationStateType? {
+    public func transitionFromState(_ state:SourceStateType?) -> DestinationStateType? {
         return self.probabilitiesFromState(state)?.randomItem()
     }
     

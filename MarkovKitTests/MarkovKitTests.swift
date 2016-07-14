@@ -21,7 +21,7 @@ class MarkovKitTests: XCTestCase {
         super.tearDown()
     }
     
-    func vectorOuputFraction<T:Hashable>(vector:ProbabilityVector<T>, item: T) -> Double {
+    func vectorOuputFraction<T:Hashable>(_ vector:ProbabilityVector<T>, item: T) -> Double {
         var counts:[T:Int] = [:]
         let n = 1000
         for _ in 0..<n {
@@ -33,7 +33,7 @@ class MarkovKitTests: XCTestCase {
         return Double(count)/Double(n)
     }
     
-    func assertNear(value:Double, target:Double, delta:Double) {
+    func assertNear(_ value:Double, target:Double, delta:Double) {
         XCTAssertLessThan(fabs(value-target), delta)
     }
     

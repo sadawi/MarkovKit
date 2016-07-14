@@ -39,7 +39,7 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
      
      Computes a likely sequence of hidden states that could have produced the observations.
      */
-    public func calculateStates(observations:[ObservationType]) -> [StateType] {
+    public func calculateStates(_ observations:[ObservationType]) -> [StateType] {
         var t:[StateType:VStructure<StateType>] = [:]
         for state in self.states {
             let p0 = self.initialProbabilities[state] ?? 0
