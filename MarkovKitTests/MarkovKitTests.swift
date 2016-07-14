@@ -75,10 +75,10 @@ class MarkovKitTests: XCTestCase {
             "x": ["y": 0.5, "z": 0.5]
         ]
         
-        XCTAssertEqual(matrix.transitionFromState("a"), "b")
-        XCTAssertEqual(matrix.transitionFromState("1"), "2")
+        XCTAssertEqual(matrix.transition(fromState: "a"), "b")
+        XCTAssertEqual(matrix.transition(fromState: "1"), "2")
         
-        let either = matrix.transitionFromState("x")
+        let either = matrix.transition(fromState: "x")
         XCTAssertTrue(either == "y" || either == "z")
     }
     

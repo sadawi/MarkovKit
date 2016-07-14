@@ -27,7 +27,7 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     
     public required init(dictionaryLiteral elements: (Key, Value)...) {
         for (key, value) in elements {
-            self.setProbabilitiesFromState(key, probabilities: value)
+            self.setProbabilities(fromState: key, probabilities: value)
         }
     }
     
@@ -54,7 +54,7 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
         self.init(sourceStates: sourceStates, destinationStates: destinationStates, probabilitySets: probabilitySets)
     }
     
-    public func probabilitiesFromState(_ state:SourceStateType?) -> RowType? {
+    public func probabilities(fromState state:SourceStateType?) -> RowType? {
         if let state = state {
             return self.rows[state]
         } else {
@@ -62,7 +62,7 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
         }
     }
     
-    public func setProbabilitiesFromState(_ state:SourceStateType?, probabilities:RowType) {
+    public func setProbabilities(fromState state:SourceStateType?, probabilities:RowType) {
         if let state = state {
             self.rows[state] = probabilities
         } else {
@@ -72,22 +72,22 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     
     public subscript(state:SourceStateType?) -> RowType? {
         get {
-            return self.probabilitiesFromState(state)
+            return self.probabilities(fromState: state)
         }
         set {
             if let newValue = newValue {
-                self.setProbabilitiesFromState(state, probabilities: newValue)
+                self.setProbabilities(fromState: state, probabilities: newValue)
             }
         }
     }
 
     
-    public func probabilityOfState(_ state:DestinationStateType, fromState initialState:SourceStateType?) -> Double {
-        return self.probabilitiesFromState(initialState)?.probabilityOfItem(state) ?? 0
+    public func probability(ofState state:DestinationStateType, fromState initialState:SourceStateType?) -> Double {
+        return self.probabilities(fromState: initialState)?.probabilityOfItem(state) ?? 0
     }
     
-    public func transitionFromState(_ state:SourceStateType?) -> DestinationStateType? {
-        return self.probabilitiesFromState(state)?.randomItem()
+    public func transition(fromState state:SourceStateType?) -> DestinationStateType? {
+        return self.probabilities(fromState: state)?.randomItem()
     }
     
     public func inverted() -> Self {
