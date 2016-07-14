@@ -63,7 +63,7 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
                     vPath = objs?.vPath ?? []
                     vProb = objs?.vProb ?? 0.0
                     
-                    let p = self.emissionProbabilities.probability(ofState: output, fromState: sourceState) * self.transitionProbabilities.probability(ofState: nextState, fromState: sourceState)
+                    let p = self.emissionProbabilities.probability(of: output, from: sourceState) * self.transitionProbabilities.probability(of: nextState, from: sourceState)
                     prob = prob * p
                     vProb = vProb * p
                     total = total + prob

@@ -13,7 +13,7 @@ public class MarkovModel<StateType:Hashable>: ProbabilityMatrix<StateType, State
     public required init(dictionaryLiteral elements: (Key, Value)...) {
         super.init()
         for (key, value) in elements {
-            self.setProbabilities(fromState: key, probabilities: value)
+            self.setProbabilities(from: key, probabilities: value)
         }
     }
     
@@ -32,7 +32,7 @@ public class MarkovModel<StateType:Hashable>: ProbabilityMatrix<StateType, State
         }
         var state = initialState
         while result.count < maximumLength {
-            state = self.transition(fromState: state)
+            state = self.transition(from: state)
             if let state = state {
                 result.append(state)
             } else {

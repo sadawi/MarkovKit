@@ -41,7 +41,7 @@ class MarkovKitTests: XCTestCase {
         let delta = 0.05
         let colors = ["red", "blue", "green"]
         let vector = ProbabilityVector(items: colors)
-        XCTAssertEqual(vector.probability(ofItem: "red"), Double(1)/Double(3))
+        XCTAssertEqual(vector.probability(of: "red"), Double(1)/Double(3))
         
         let vectorA = ProbabilityVector(items: colors, probabilities: [2, 1, 1])
         XCTAssertEqual(vectorA["red"], 0.5)
@@ -75,10 +75,10 @@ class MarkovKitTests: XCTestCase {
             "x": ["y": 0.5, "z": 0.5]
         ]
         
-        XCTAssertEqual(matrix.transition(fromState: "a"), "b")
-        XCTAssertEqual(matrix.transition(fromState: "1"), "2")
+        XCTAssertEqual(matrix.transition(from: "a"), "b")
+        XCTAssertEqual(matrix.transition(from: "1"), "2")
         
-        let either = matrix.transition(fromState: "x")
+        let either = matrix.transition(from: "x")
         XCTAssertTrue(either == "y" || either == "z")
     }
     
