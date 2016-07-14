@@ -27,7 +27,7 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     
     public required init(dictionaryLiteral elements: (Key, Value)...) {
         for (key, value) in elements {
-            self.setProbabilitiesFromState(key, probabilities: value)
+            self.setProbabilities(from: key, probabilities: value)
         }
     }
     
@@ -47,14 +47,14 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     
     public convenience init(sourceStates:[SourceStateType], destinationStates:[DestinationStateType], CSVString string:String) {
         var probabilitySets:[[Double]] = []
-        for line in string.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) {
+        for line in string.components(separatedBy: CharacterSet.newlines) {
             let probabilities = ProbabilityVector<SourceStateType>.parseCSV(line)
             probabilitySets.append(probabilities)
         }
         self.init(sourceStates: sourceStates, destinationStates: destinationStates, probabilitySets: probabilitySets)
     }
     
-    public func probabilitiesFromState(state:SourceStateType?) -> RowType? {
+    public func probabilities(from state:SourceStateType?) -> RowType? {
         if let state = state {
             return self.rows[state]
         } else {
@@ -62,7 +62,7 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
         }
     }
     
-    public func setProbabilitiesFromState(state:SourceStateType?, probabilities:RowType) {
+    public func setProbabilities(from state:SourceStateType?, probabilities:RowType) {
         if let state = state {
             self.rows[state] = probabilities
         } else {
@@ -72,22 +72,22 @@ public class ProbabilityMatrix<SourceStateType:Hashable, DestinationStateType:Ha
     
     public subscript(state:SourceStateType?) -> RowType? {
         get {
-            return self.probabilitiesFromState(state)
+            return self.probabilities(from: state)
         }
         set {
             if let newValue = newValue {
-                self.setProbabilitiesFromState(state, probabilities: newValue)
+                self.setProbabilities(from: state, probabilities: newValue)
             }
         }
     }
 
     
-    public func probabilityOfState(state:DestinationStateType, fromState initialState:SourceStateType?) -> Double {
-        return self.probabilitiesFromState(initialState)?.probabilityOfItem(state) ?? 0
+    public func probability(of state:DestinationStateType, from initialState:SourceStateType?) -> Double {
+        return self.probabilities(from: initialState)?.probability(of: state) ?? 0
     }
     
-    public func transitionFromState(state:SourceStateType?) -> DestinationStateType? {
-        return self.probabilitiesFromState(state)?.randomItem()
+    public func transition(from state:SourceStateType?) -> DestinationStateType? {
+        return self.probabilities(from: state)?.randomItem()
     }
     
     public func inverted() -> Self {
