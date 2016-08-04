@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "MarkovKit"
-    s.version          = "0.6.0"
+    s.version          = "0.6.1"
     s.summary          = "Tools for working with Markov models"
     s.homepage         = "https://github.com/sadawi/MarkovKit"
     s.license          = 'MIT'
@@ -11,7 +11,4 @@ Pod::Spec.new do |s|
     s.requires_arc = true
 
     s.source_files = 'MarkovKit/**/*'
-    s.resource_bundles = {
-    'MarkovKit' => ['MarkovKit/*.png']
-    }
 end
