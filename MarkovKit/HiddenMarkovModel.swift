@@ -101,7 +101,9 @@ public class HiddenMarkovModel<StateType:Hashable, ObservationType:Hashable> {
         var states:[StateType] = argmax
         
         // the algorithm leaves an extra state on the end
-        states.removeLast()
+        if states.count > 0 {
+            states.removeLast()
+        }
         return states
     }
     
